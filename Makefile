@@ -1,8 +1,3 @@
-# ########################################################## #
-# Makefile for Golang Project
-# Includes cross-compiling, installation, cleanup
-# ########################################################## #
-
 # Check for required command tools to build or stop immediately
 EXECUTABLES = git go find pwd
 K := $(foreach exec,$(EXECUTABLES),\
@@ -12,24 +7,20 @@ ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 BUILD_DIR="${ROOT_DIR}/bin"
 BINARY=deliveroo-cron
-VERSION=1.0.0
 BUILD=`git rev-parse HEAD`
-PLATFORMS=darwin linux windows
+PLATFORMS=darwin linux
 ARCHITECTURES=386 amd64
-
-# Setup linker flags option for build that interoperate with variable names in src code
-LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD}"
 
 default: build
 
-all: clean build_all
+all: test clean build_all
 
 test:
 	go test ./... -count=1
 
 build:
 	mkdir -p ${BUILD_DIR}
-	go build ${LDFLAGS} -o ${BUILD_DIR}/${BINARY}
+	go build -o ${BUILD_DIR}/${BINARY}
 
 build_all:
 	mkdir -p ${BUILD_DIR}
