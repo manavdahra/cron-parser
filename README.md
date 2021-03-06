@@ -116,3 +116,13 @@ W
 ?
 H
 ```
+
+Troubleshooting issues:
+==
+If in case you encounter this error: 
+```text
+make all
+> cmd/go: unsupported GOOS/GOARCH pair darwin/386
+```
+Then inside Makefile change `ARCHITECTURES=386 amd64` to `ARCHITECTURES=amd64` then the build 
+should work fine
