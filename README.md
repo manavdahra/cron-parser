@@ -23,12 +23,13 @@ Prerequisites: Git, GoLang
 ```text
 cd $HOME
 mkdir -p go
+apt-get update && apt-get install wget
 wget https://golang.org/dl/go1.14.6.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 mkdir -p ${GOPATH}/src ${GOPATH}/bin
-apt update && apt install git
+apt-get install git
 ```
 2. For alpine docker images:
 ```text
@@ -77,7 +78,7 @@ Prerequisite: Make
 ### Installing Make:
 1. For linux debian
 ```text
-apt update && apt-get install build-essential
+apt-get update && apt-get install build-essential
 ```
 2. For Alpine
 ```text
