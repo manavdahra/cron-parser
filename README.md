@@ -13,25 +13,85 @@ day of week   1,2,3,4,5
 command       /usr/bin/find
 ```
 
+Setup:
+==
+Prerequisites: GoLang
+
+### Installing Golang:
+
+1. For linux debian: 
+```text
+cd $HOME
+mkdir -p go
+wget https://golang.org/dl/go1.14.6.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+mkdir -p ${GOPATH}/src ${GOPATH}/bin
+```
+2. For alpine docker images:
+```text
+cd $HOME
+mkdir -p go
+apk add --no-cache musl-dev go
+export GOPATH=$HOME/go
+mkdir -p ${GOPATH}/src ${GOPATH}/bin
+```
+3. For Mac OSX:
+```text
+cd $HOME
+mkdir -p go
+brew install go@1.14
+export GOPATH=$HOME/go
+mkdir -p ${GOPATH}/src ${GOPATH}/bin
+```
+
+Clone repo:
+==
+
+```text
+cd $GOPATH/src
+# you might have to setup your git credentials before
+git clone https://github.com/manavdahra/deliveroo-cron.git 
+cd deliveroo-cron/
+```
+
+Run using prebuilt binaries:
+==
+Depending upon your platform type and architecture. Choose the relevant binary to run.
+
+Example:
+For linux x86-64
+```text
+bin/deliveroo-cron-linux-amd64  "*/15 0 1,15 * 1-5 /usr/bin/find"
+```
+![Example](ss.png "Steps")
+
 Build & Run:
 ==
-To run the utility follow the below mentioned steps:
+Prerequisite: Make
 
-1. `make all` (under root project folder)
-   
-    Depending upon different system architectures and platforms, binary files shall be generated under the path `bin` folder
-   
-2. `bin/deliveroo-cron-darwin-amd64 "* 3 1-10 */3 6 /usr/bin/find"`
-    ```text
-    minute        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59
-    hour          3
-    day of month  1,2,3,4,5,6,7,8,9,10
-    month         3,6,9,12
-    day of week   6
-    command       /usr/bin/find
-    ```
-   
-![Example](ss.png "Steps")
+### Installing Make:
+1. For linux debian
+```text
+apt update && apt-get install build-essential
+```
+2. For Alpine
+```text
+apk update && apk add --no-cache make
+```
+3. For Mac OSX
+```text
+brew install make
+```
+
+To build the utility follow the steps mentioned below:
+
+```text
+cd $GOPATH/deliveroo-cron
+make-all
+bin/deliveroo-cron-linux-amd64  "*/15 0 1,15 * 1-5 /usr/bin/find"
+```
 
 Unhandled fields/expressions
 ==
