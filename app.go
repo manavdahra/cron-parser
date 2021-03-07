@@ -27,5 +27,3 @@ func main() {
 
 	fmt.Println(cron.String())
 }
-
-

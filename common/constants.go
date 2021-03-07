@@ -1,7 +1,6 @@
 package common
 
 const (
-	// TODO: make this more readable and descriptive
 	HelpFmt = `
 Command line arguments supplied are not valid:
 Example format: "%s /usr/bin/find"

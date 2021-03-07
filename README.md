@@ -4,6 +4,7 @@ Cron Expression parser
 This utility enables a user to pass in arguments as a combination of `cron expression + command` in standard format
 `(Example: */15 0 1,15 * 1-5 /usr/bin/find)`
 and spits out the output in exploded format as follows:
+
 ```text
 minute        0,15,30,45
 hour          0
@@ -19,7 +20,8 @@ Prerequisites: Git, GoLang
 
 ### Installing Golang:
 
-1. For Debian: 
+1. For Debian:
+
 ```text
 cd $HOME
 mkdir -p go
@@ -30,7 +32,9 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 mkdir -p ${GOPATH}/src ${GOPATH}/bin
 ```
+
 2. For Alpine:
+
 ```text
 cd $HOME
 mkdir -p go
@@ -38,7 +42,9 @@ apk update && apk add --no-cache musl-dev go git
 export GOPATH=$HOME/go
 mkdir -p ${GOPATH}/src ${GOPATH}/bin
 ```
+
 3. For RPM:
+
 ```text
 cd $HOME
 mkdir -p go
@@ -49,7 +55,9 @@ chmod +x goinstall.sh
 source /home/builder/.bashrc
 mkdir -p ${GOPATH}/src ${GOPATH}/bin
 ```
+
 4. For Mac OSX:
+
 ```text
 cd $HOME
 mkdir -p go
@@ -75,13 +83,17 @@ Depending upon your platform type and architecture. Choose the relevant binary t
 
 Example:
 For linux x86-64
+
 ```text
 bin/share/deliveroo-cron-linux-amd64  "*/15 0 1,15 * 1-5 /usr/bin/find"
 ```
+
 For linux i386
+
 ```text
 bin/share/deliveroo-cron-linux-386  "*/15 0 1,15 * 1-5 /usr/bin/find"
 ```
+
 Similarly, for Mac OSX, following distributions are available:
 `bin/share/deliveroo-cron-darwin-amd64, bin/share/deliveroo-cron-darwin-386`
 
@@ -92,19 +104,27 @@ Build & Run:
 Prerequisite: Make
 
 ### Installing Make:
+
 1. For Debian
+
 ```text
 apt-get update && apt-get install build-essential
 ```
+
 2. For Alpine
+
 ```text
 apk update && apk add --no-cache make
 ```
+
 3. For RPM
+
 ```text
 yum install make
 ```
+
 3. For Mac OSX
+
 ```text
 brew install make
 ```
@@ -123,6 +143,7 @@ Unhandled fields/expressions
 For the sake of simplicity, only standard CRON expression format is supported for now
 
 List of **not** supported fields:
+
 ```text
 @yearly
 @annually

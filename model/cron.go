@@ -5,6 +5,30 @@ import (
 	"fmt"
 )
 
+// Cron struct is used to represent the cron expression in expanded form
+// For example:
+// Given,
+// cron expression: */15 0 1,15 * 1-5
+//
+// that is,
+// Minutes segment: 		*/15
+// Hours segment: 			0
+// DaysOfMonth segment: 	1,15
+// Months segment: 			*
+// DaysOfWeek segment: 		1-5
+//
+// Then,
+// Bitset is used to represent each segment field in Cron in expanded form
+// it has a big.Int field having bits set to either 1 or 0
+// 1 represent the numbers to be included in segment
+// 0 represent the numbers to be excluded from segment
+// For example:
+// DaysOfWeek = 1-5
+//
+// Then,
+// DaysOfWeek Bitset
+// 0  1  1  1  1  1  0
+// 0, 1, 2, 3, 4, 5, 6
 type Cron struct {
 	Expression  string
 	Months      Bitset

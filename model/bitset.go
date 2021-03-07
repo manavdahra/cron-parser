@@ -14,7 +14,25 @@ type Bitset struct {
 	Max int
 }
 
-// TODO: Decode documentation needed
+// Decode is a function in Bitset struct
+// This is used to decode a segment of a cron expression and set bits in big.Int field
+//
+// The result of this function is a bitset struct with big.Int field having bits set to 1 or 0
+// 1 represent the numbers to be included in segment
+// 0 represent the numbers to be excluded from segment
+//
+// For example:
+// Given
+// Days of week segment (Bitset)
+// 0  0  0  0  0  0  0
+// 0, 1, 2, 3, 4, 5, 6
+//
+// When
+// Days of week = 1-5
+//
+// Then, after Decode
+// 0  1  1  1  1  1  0
+// 0, 1, 2, 3, 4, 5, 6
 func (bitset *Bitset) Decode(expression string) error {
 	fields := strings.Split(expression, ",")
 	for _, field := range fields {

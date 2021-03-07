@@ -11,7 +11,12 @@ type Interval struct {
 	End   int
 }
 
-// TODO: NewInterval documentation needed
+// NewInterval returns a new instance of Interval struct having a range of values {Start, End}
+// Cases:
+// 1. * 	=> {Start: min, End: max-1}
+// 2. 1-5 	=> {Start: 1, 	End: 5}
+// 3. 15	=> {Start: 15, 	End: 15}
+// additionally has validation checks on bounds and Start <= End
 func NewInterval(field string, min, max int) (*Interval, error) {
 	interval := &Interval{}
 	if strings.Contains(field, "*") {

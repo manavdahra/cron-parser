@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-var decodeSequence = []func (field string, cron *model.Cron) error{
+var decodeSequence = []func(field string, cron *model.Cron) error{
 	decodeMinutes,
 	decodeHours,
 	decodeDaysOfMonth,
