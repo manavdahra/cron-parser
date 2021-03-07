@@ -30,6 +30,6 @@ build_all:
 
 # Remove only what we've created
 clean:
-	find ${ROOT_DIR} -name '${BINARY}[-?][a-zA-Z0-9]*[-?][a-zA-Z0-9]*' -delete
+	rm -f "${BUILD_DIR}/${BINARY}"
 
 .PHONY: check test clean build build_all all
