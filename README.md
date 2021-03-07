@@ -19,28 +19,37 @@ Prerequisites: Git, GoLang
 
 ### Installing Golang:
 
-1. For linux debian: 
+1. For Debian: 
 ```text
 cd $HOME
 mkdir -p go
-apt-get update && apt-get install wget
+apt-get update && apt-get install wget git
 wget https://golang.org/dl/go1.14.6.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 mkdir -p ${GOPATH}/src ${GOPATH}/bin
-apt-get install git
 ```
-2. For alpine docker images:
+2. For Alpine:
 ```text
 cd $HOME
 mkdir -p go
-apk add --no-cache musl-dev go
+apk update && apk add --no-cache musl-dev go git
 export GOPATH=$HOME/go
 mkdir -p ${GOPATH}/src ${GOPATH}/bin
-apk update && apk add --no-cache git
 ```
-3. For Mac OSX:
+3. For RPM:
+```text
+cd $HOME
+mkdir -p go
+yum update && yum install wget which git
+wget https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh
+chmod +x goinstall.sh
+./goinstall.sh
+source /home/builder/.bashrc
+mkdir -p ${GOPATH}/src ${GOPATH}/bin
+```
+4. For Mac OSX:
 ```text
 cd $HOME
 mkdir -p go
@@ -67,8 +76,15 @@ Depending upon your platform type and architecture. Choose the relevant binary t
 Example:
 For linux x86-64
 ```text
-bin/deliveroo-cron-linux-amd64  "*/15 0 1,15 * 1-5 /usr/bin/find"
+bin/share/deliveroo-cron-linux-amd64  "*/15 0 1,15 * 1-5 /usr/bin/find"
 ```
+For linux i386
+```text
+bin/share/deliveroo-cron-linux-386  "*/15 0 1,15 * 1-5 /usr/bin/find"
+```
+Similarly, for Mac OSX, following distributions are available:
+`bin/share/deliveroo-cron-darwin-amd64, bin/share/deliveroo-cron-darwin-386`
+
 ![Example](ss.png "Steps")
 
 Build & Run:
@@ -76,13 +92,17 @@ Build & Run:
 Prerequisite: Make
 
 ### Installing Make:
-1. For linux debian
+1. For Debian
 ```text
 apt-get update && apt-get install build-essential
 ```
 2. For Alpine
 ```text
 apk update && apk add --no-cache make
+```
+3. For RPM
+```text
+yum install make
 ```
 3. For Mac OSX
 ```text
@@ -94,7 +114,7 @@ To build the utility follow the steps mentioned below:
 ```text
 cd $GOPATH/src/deliveroo-cron
 make all
-bin/deliveroo-cron-linux-amd64  "*/15 0 1,15 * 1-5 /usr/bin/find"
+bin/deliveroo-cron  "*/15 0 1,15 * 1-5 /usr/bin/find"
 ```
 
 Unhandled fields/expressions
@@ -117,13 +137,3 @@ W
 ?
 H
 ```
-
-Troubleshooting issues:
-==
-If in case you encounter this error: 
-```text
-make all
-> cmd/go: unsupported GOOS/GOARCH pair darwin/386
-```
-Then inside Makefile change `ARCHITECTURES=386 amd64` to `ARCHITECTURES=amd64` then the build 
-should work fine
