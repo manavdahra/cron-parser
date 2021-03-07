@@ -25,7 +25,7 @@ cd $HOME
 mkdir -p go
 apt-get update && apt-get install wget git
 wget https://golang.org/dl/go1.14.6.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 mkdir -p ${GOPATH}/src ${GOPATH}/bin
