@@ -45,17 +45,21 @@ func (bitset *Bitset) Decode(expression string) error {
 			if err != nil {
 				return err
 			}
+
+			// set interval end to max if "-" is not present in segment
 			if !strings.Contains(split[0], "-") {
 				interval.End = bitset.Max - 1
 			}
-			delta, err := strconv.Atoi(split[1])
+			// extract step value
+			step, err := strconv.Atoi(split[1])
 			if err != nil {
 				return err
 			}
-			if delta <= 0 {
+			if step <= 0 {
 				return common.ErrInvalidExpStepsNegative
 			}
-			for i := interval.Start; i <= interval.End; i += delta {
+			// assign bits in steps
+			for i := interval.Start; i <= interval.End; i += step {
 				bitset.SetBit(&bitset.Int, i, 1)
 			}
 		} else {
@@ -63,6 +67,7 @@ func (bitset *Bitset) Decode(expression string) error {
 			if err != nil {
 				return err
 			}
+			// set bits in interval
 			for i := interval.Start; i <= interval.End; i++ {
 				bitset.SetBit(&bitset.Int, i, 1)
 			}

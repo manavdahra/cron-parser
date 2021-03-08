@@ -12,14 +12,17 @@ import (
 func main() {
 	appArguments := os.Args
 
-	helperString := fmt.Sprintf(common.HelpFmt, common.CronExp)
+	// Validate, we have right no of program arguments
 	if len(appArguments) != 2 {
-		panic(helperString)
+		panic(fmt.Sprintf(common.HelpFmt, common.CronExp))
 	}
 
 	cronExpression, command := util.ParseCommandLineArgs(appArguments[1])
 
+	// instantiate a new empty Cron struct
 	cron := model.NewCron(command)
+
+	// decode it using cron expression
 	err := decoder.Decode(cronExpression, cron)
 	if err != nil {
 		panic(err.Error())
