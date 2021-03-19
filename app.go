@@ -4,6 +4,7 @@ import (
 	"deliveroo-cron/common"
 	"deliveroo-cron/decoder"
 	"deliveroo-cron/model"
+	"deliveroo-cron/scheduler"
 	"deliveroo-cron/util"
 	"fmt"
 	"os"
@@ -20,7 +21,7 @@ func main() {
 
 	cronExpression, command := util.ParseCommandLineArgs(appArguments[1])
 
-	// instantiate a new empty Cron struct
+	// instantiate a new empty Trigger struct
 	cron := model.NewCron(command)
 
 	// decode it using cron expression
@@ -31,4 +32,10 @@ func main() {
 
 	fmt.Println(cron.String())
 	fmt.Println(cron.Next(time.Now()))
+	_scheduler := scheduler.NewScheduler(scheduler.Config{
+		Duration: time.Millisecond,
+		Period:   500,
+	})
+	_scheduler.RegisterCron(cron)
+	_scheduler.Run()
 }
