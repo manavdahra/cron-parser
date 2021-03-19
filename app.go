@@ -7,6 +7,7 @@ import (
 	"deliveroo-cron/util"
 	"fmt"
 	"os"
+	"time"
 )
 
 func main() {
@@ -29,4 +30,5 @@ func main() {
 	}
 
 	fmt.Println(cron.String())
+	fmt.Println(cron.Next(time.Now()))
 }

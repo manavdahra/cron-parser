@@ -9,6 +9,7 @@ import (
 
 // decodeSequence is a list of all decoders to execute in a sequence
 var decodeSequence = []func(field string, cron *model.Cron) error{
+	decodeSeconds,
 	decodeMinutes,
 	decodeHours,
 	decodeDaysOfMonth,
@@ -36,6 +37,13 @@ func Decode(expression string, cron *model.Cron) error {
 		}
 	}
 
+	return nil
+}
+
+func decodeSeconds(field string, cron *model.Cron) error {
+	if err := cron.Seconds.Decode(field); err != nil {
+		return err
+	}
 	return nil
 }
 

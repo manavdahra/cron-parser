@@ -28,7 +28,7 @@ type Bitset struct {
 // 0, 1, 2, 3, 4, 5, 6
 //
 // When
-// Days of week = 1-5
+// Days of week = 1,2,4-5
 //
 // Then, after Decode
 // 0  1  1  1  1  1  0
@@ -74,6 +74,15 @@ func (bitset *Bitset) Decode(expression string) error {
 		}
 	}
 	return nil
+}
+
+func (bitset *Bitset) NextSetBit(from int) int {
+	for index := from; index < bitset.Max; index++ {
+		if bitset.Bit(index) == 1 {
+			return index
+		}
+	}
+	return -1
 }
 
 func (bitset *Bitset) String() string {
