@@ -60,7 +60,7 @@ func (bitset *Bitset) Decode(expression string) error {
 			}
 			// assign bits in steps
 			for i := interval.Start; i <= interval.End; i += step {
-				bitset.SetBit(&bitset.Int, i, 1)
+				bitset.SetBit(&bitset.Int, i%bitset.Max, 1)
 			}
 		} else {
 			interval, err := NewInterval(field, bitset.Min, bitset.Max)
@@ -69,7 +69,7 @@ func (bitset *Bitset) Decode(expression string) error {
 			}
 			// set bits in interval
 			for i := interval.Start; i <= interval.End; i++ {
-				bitset.SetBit(&bitset.Int, i, 1)
+				bitset.SetBit(&bitset.Int, i%bitset.Max, 1)
 			}
 		}
 	}

@@ -50,8 +50,8 @@ func NewInterval(field string, min, max int) (*Interval, error) {
 	if interval.Start < min || interval.End < min || interval.Start >= max || interval.End >= max {
 		return nil, common.ErrIntervalOutOfBounds
 	}
-	if interval.Start > interval.End {
-		return nil, common.ErrInvalidIntervalLimits
+	if interval.Start > interval.End { // 4, 5, 6, 7, 8
+		interval.End = interval.End + max
 	}
 	return interval, nil
 }

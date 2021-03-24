@@ -2,14 +2,12 @@ package util
 
 import (
 	"fmt"
-	"github.com/thoas/go-funk"
 	"strings"
 )
 
 func ReplaceWithOrdinal(value string, slice []string) string {
-	index := funk.IndexOf(slice, strings.ToUpper(value))
-	if index < 0 {
-		return value
+	for index, day := range slice {
+		value = strings.ReplaceAll(value, day, fmt.Sprintf("%d", index))
 	}
-	return fmt.Sprintf("%d", index)
+	return value
 }
